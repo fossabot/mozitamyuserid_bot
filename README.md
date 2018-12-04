@@ -7,3 +7,5 @@ Il proprio userid viene, automaticamente, aggiunto alla lista "userid_list.json"
 
 Progetto sviluppato da Sav22999.
 Il token per accedere al bot diretto è nascosto, per ovvie ragioni.
+
+> **Per poter funzionare in chat di gruppo, il bot deve essere necessariamente amministratore del gruppo**
