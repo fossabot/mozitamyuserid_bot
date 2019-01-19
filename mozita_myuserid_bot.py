@@ -21,8 +21,8 @@ if TOKEN == "":
     print("Token non presente.")
     exit()
 
-versione="1.0.1"
-ultimoAggiornamento="18-01-2019"
+versione="1.0.2"
+ultimoAggiornamento="19-01-2019"
 
 def risposte(msg):
     type_msg="NO"
