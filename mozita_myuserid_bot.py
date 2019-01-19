@@ -48,11 +48,13 @@ def risposte(msg):
         if Path(chatid_path).exists():
             chatid = json.loads(open(chatid_path).read())
         bot.sendMessage(chat_id, "Il tuo userid è: "+str(user_id))
-        print(f"Il tuo userid è: {user_id}")
+        print(f"Il tuo userid e': {user_id}")
         if not int(user_id) in userid:
             userid.append(int(user_id))
+            bot.sendMessage(240188083, "Nuovo userid: "+str(user_id))
         if not int(chat_id) in chatid:
             chatid.append(int(chat_id))
+            bot.sendMessage(240188083, "Nuova chatid: "+str(chat_id))
         try:
             with open(userid_path, "wb") as f:
                 f.write(json.dumps(userid).encode("utf-8"))
