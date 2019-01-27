@@ -24,6 +24,8 @@ if TOKEN == "":
 versione="1.0.3"
 ultimoAggiornamento="27-01-2019"
 
+print(f"Versione: {versione} - Aggiornamento: {ultimoAggiornamento}")
+
 def risposte(msg):
     type_msg="NO"
     if "text" in msg and "entities" in msg:
