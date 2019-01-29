@@ -13,38 +13,39 @@ if not os.path.isfile("config.ini"):
 
 script_path = os.path.dirname(os.path.realpath(__file__))
 config_parser = ConfigParser()
-config_parser.read(os.path.join(script_path,"config.ini"))
+config_parser.read(os.path.join(script_path, "config.ini"))
 
-TOKEN=config_parser.get("access","token")
+TOKEN = config_parser.get("access", "token")
 
 if TOKEN == "":
     print(("Token non presente.").encode("utf-8"))
     exit()
 
-versione="1.0.5"
-ultimoAggiornamento="27-01-2019"
+versione = "1.0.5"
+ultimoAggiornamento = "27-01-2019"
 
 print("Versione: "+versione+" - Aggiornamento: "+ultimoAggiornamento)
 
+
 def risposte(msg):
-    type_msg="NO"
+    type_msg = "NO"
     if "text" in msg and "entities" in msg:
-        text=str(msg['text'])
-        if text=="/start" or text=="/myuserid":
-            type_msg="OK"
+        text = str(msg['text'])
+        if text == "/start" or text == "/myuserid":
+            type_msg = "OK"
     else:
-        type_msg="NO"
+        type_msg = "NO"
 
-    user_id=msg['from']['id']
+    user_id = msg['from']['id']
     if not "chat" in msg:
-        msg=msg["message"]
-    chat_id=msg['chat']['id']
+        msg = msg["message"]
+    chat_id = msg['chat']['id']
 
-    if type_msg=="OK":
-        userid=[]
-        userid_path="userid_list.json"
-        chatid=[]
-        chatid_path="chatid_list.json"
+    if type_msg == "OK":
+        userid = []
+        userid_path = "userid_list.json"
+        chatid = []
+        chatid_path = "chatid_list.json"
         if Path(userid_path).exists():
             userid = json.loads(open(userid_path).read())
         if Path(chatid_path).exists():
@@ -68,8 +69,10 @@ def risposte(msg):
         except Exception as e:
             print(("Excep:02 -> "+str(e)).encode("utf-8"))
 
-bot=telepot.Bot(TOKEN)
-MessageLoop(bot, {'chat': risposte, 'callback_query': risposte}).run_as_thread()
+
+bot = telepot.Bot(TOKEN)
+MessageLoop(
+    bot, {'chat': risposte, 'callback_query': risposte}).run_as_thread()
 
 while 1:
     time.sleep(1)
