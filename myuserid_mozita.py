@@ -21,8 +21,8 @@ if TOKEN == "":
     print(("Token non presente.").encode("utf-8"))
     exit()
 
-versione = "1.0.5"
-ultimoAggiornamento = "27-01-2019"
+versione = "1.0.6"
+ultimoAggiornamento = "01-03-2019"
 
 print("Versione: "+versione+" - Aggiornamento: "+ultimoAggiornamento)
 
@@ -37,12 +37,16 @@ def risposte(msg):
         type_msg = "NO"
 
     user_id = msg['from']['id']
+    if "username" in msg['from']:
+        user_name = msg['from']['username']
+    else:
+        user_name = "[*NessunUsername*]"+str(user_id)
     if not "chat" in msg:
         msg = msg["message"]
     chat_id = msg['chat']['id']
 
     if type_msg == "OK":
-        userid = []
+        userid = {}
         userid_path = "userid_list.json"
         chatid = []
         chatid_path = "chatid_list.json"
@@ -51,12 +55,12 @@ def risposte(msg):
         if Path(chatid_path).exists():
             chatid = json.loads(open(chatid_path).read())
         bot.sendMessage(chat_id, "Il tuo userid è: "+str(user_id))
-        print(str(('Il tuo userid è: '+str(user_id)).encode("utf-8")))
-        if not int(user_id) in userid:
-            userid.append(int(user_id))
-            bot.sendMessage(240188083, "Nuovo userid: "+str(user_id))
-        if not int(chat_id) in chatid:
-            chatid.append(int(chat_id))
+        print('Userid: '+str(user_id))
+        if not str(user_id) in userid.keys():
+            userid[str(user_id)]=str(user_name)
+            bot.sendMessage(240188083, "Nuovo userid: "+str(user_id)+" - Username: "+str(user_name))
+        if not str(chat_id) in chatid and not str(chat_id) == str(user_id):
+            chatid.append(str(chat_id))
             bot.sendMessage(240188083, "Nuova chatid: "+str(chat_id))
         try:
             with open(userid_path, "wb") as f:
