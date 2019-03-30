@@ -21,8 +21,8 @@ if TOKEN == "":
     print(("Token non presente.").encode("utf-8"))
     exit()
 
-versione = "1.0.6"
-ultimoAggiornamento = "01-03-2019"
+versione = "1.0.7"
+ultimoAggiornamento = "30-03-2019"
 
 print("Versione: "+versione+" - Aggiornamento: "+ultimoAggiornamento)
 
@@ -58,7 +58,7 @@ def risposte(msg):
         print('Userid: '+str(user_id))
         if not str(user_id) in userid.keys():
             userid[str(user_id)]=str(user_name)
-            bot.sendMessage(240188083, "Nuovo userid: "+str(user_id)+" - Username: "+str(user_name))
+            bot.sendMessage(240188083, "Nuovo userid: "+str(user_id)+" - Username: <a href='tg://user?id="+str(user_id)+"'>"+str(user_name)+"</a>",parse_mode="HTML")
         if not str(chat_id) in chatid and not str(chat_id) == str(user_id):
             chatid.append(str(chat_id))
             bot.sendMessage(240188083, "Nuova chatid: "+str(chat_id))
